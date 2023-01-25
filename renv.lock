@@ -314,14 +314,14 @@
       "Package": "dcamodules",
       "Version": "0.1.0",
       "Source": "GitHub",
-      "Remotes": "Sage-Bionetworks/sagethemes",
       "RemoteType": "github",
+      "Remotes": "Sage-Bionetworks/sagethemes",
       "RemoteHost": "api.github.com",
       "RemoteRepo": "dcamodules",
       "RemoteUsername": "Sage-Bionetworks",
       "RemoteRef": "HEAD",
       "RemoteSha": "3c7765f4b21ef898d1794fc3a58b356ba3721822",
-      "Hash": "a55df0a1785e77ba98d2800e1f4cf531",
+      "Hash": "3949bfbc96acff1a8c410a8566a4a00d",
       "Requirements": [
         "base64enc",
         "colourpicker",
@@ -681,13 +681,14 @@
     },
     "htmltools": {
       "Package": "htmltools",
-      "Version": "0.5.3",
+      "Version": "0.5.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "6496090a9e00f8354b811d1a2d47b566",
+      "Hash": "9d27e99cc90bd701c0a7a63e5923f9b7",
       "Requirements": [
         "base64enc",
         "digest",
+        "ellipsis",
         "fastmap",
         "rlang"
       ]
@@ -1385,10 +1386,10 @@
     },
     "roxygen2": {
       "Package": "roxygen2",
-      "Version": "7.2.2",
+      "Version": "7.2.3",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "d0dbb227bab26a4b8af658d81bfb6b36",
+      "Hash": "7b153c746193b143c14baa072bae4e27",
       "Requirements": [
         "R6",
         "brew",
@@ -1396,7 +1397,6 @@
         "commonmark",
         "cpp11",
         "desc",
-        "digest",
         "knitr",
         "pkgload",
         "purrr",
@@ -1524,10 +1524,10 @@
     },
     "shiny": {
       "Package": "shiny",
-      "Version": "1.7.3",
+      "Version": "1.7.4",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "fe12df67fdb3b1142325cc54f100cc06",
+      "Hash": "c2eae3d8c670fa9dfa35a12066f4a1d5",
       "Requirements": [
         "R6",
         "bslib",
