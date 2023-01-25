@@ -14,7 +14,8 @@
 
     "dataset": {
         "col_name": "Dataset Type",
-        "type": "drop_down_filter"
+        "type": "drop_down_filter",
+        "na_replace": "No manifest"
     },
 
     "num_items": {
