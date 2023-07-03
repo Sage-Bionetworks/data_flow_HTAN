@@ -347,16 +347,10 @@
       "Remotes": "Sage-Bionetworks/sagethemes",
       "RemoteHost": "api.github.com",
       "RemoteUsername": "Sage-Bionetworks",
-<<<<<<< HEAD
-      "RemoteRef": "HEAD",
-      "RemoteSha": "3c7765f4b21ef898d1794fc3a58b356ba3721822",
-      "Hash": "3949bfbc96acff1a8c410a8566a4a00d",
-=======
       "RemoteRepo": "dcamodules",
       "RemoteRef": "main",
       "RemoteSha": "1e14dcfbdaa2913eeeacc12acaac1c8264bac1f7",
       "Remotes": "Sage-Bionetworks/sagethemes",
->>>>>>> 6fbf725173593580f502f1ba3e7d49439a66dfae
       "Requirements": [
         "base64enc",
         "colourpicker",
@@ -770,16 +764,9 @@
     },
     "htmltools": {
       "Package": "htmltools",
-<<<<<<< HEAD
-      "Version": "0.5.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "9d27e99cc90bd701c0a7a63e5923f9b7",
-=======
       "Version": "0.5.5",
       "Source": "Repository",
       "Repository": "CRAN",
->>>>>>> 6fbf725173593580f502f1ba3e7d49439a66dfae
       "Requirements": [
         "R",
         "base64enc",
@@ -1434,10 +1421,7 @@
       "Version": "7.2.3",
       "Source": "Repository",
       "Repository": "CRAN",
-<<<<<<< HEAD
       "Hash": "7b153c746193b143c14baa072bae4e27",
-=======
->>>>>>> 6fbf725173593580f502f1ba3e7d49439a66dfae
       "Requirements": [
         "R",
         "R6",
@@ -1560,11 +1544,8 @@
       "Version": "1.7.4",
       "Source": "Repository",
       "Repository": "CRAN",
-<<<<<<< HEAD
       "Hash": "c2eae3d8c670fa9dfa35a12066f4a1d5",
-=======
->>>>>>> 6fbf725173593580f502f1ba3e7d49439a66dfae
-      "Requirements": [
+       "Requirements": [
         "R",
         "R6",
         "bslib",
