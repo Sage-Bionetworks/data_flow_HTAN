@@ -6,13 +6,9 @@
 #' @noRd
 #' 
 
-app_ui <- function(req) {
-  projectlive.modules::oauth_ui(req, ui_function, OAUTH_LIST)
-}
-
-ui_function <- function() {
+app_ui <- function() {
   
-  tagList(
+  shiny::tagList(
     # Leave this function for adding external resources
     golem_add_external_resources(),
     
@@ -20,16 +16,16 @@ ui_function <- function() {
     waiter::useWaiter(),
     waiter::waiterPreloader(
       
-        html = tagList(
-          img(src = "www/loading.gif"),
-          h4("Retrieving Synapse information...", style = "color:white;")),
-        color="#424874"),
+      html = shiny::tagList(
+        shiny::img(src = "www/loading.gif"),
+        shiny::h4("Retrieving Synapse information...", style = "color:white;")),
+      color="#424874"),
     
     # define colors for icons in datatable
     # green check
-    tags$style(".fa-check {color:#58A158}"),
+    shiny::tags$style(".fa-check {color:#58A158}"),
     # red x
-    tags$style(".fa-xmark {color:#B2242A}"),
+    shiny::tags$style(".fa-xmark {color:#B2242A}"),
     
     # Your application UI logic
     
@@ -72,7 +68,7 @@ ui_function <- function() {
           shinydashboard::tabItem(tabName = "dataset-dashboard",
                                   
                                   shiny::fluidRow(
-                                    uiOutput("filter_module")),
+                                    shiny::uiOutput("filter_module")),
                                   
                                   
                                   shiny::fluidRow(
@@ -81,7 +77,7 @@ ui_function <- function() {
                                       title = "Dashboard",
                                       status = "primary",
                                       collapsible = TRUE,
-                                      mod_datatable_dashboard_ui("dashboard_1")
+                                      dfamodules::mod_datatable_dashboard_ui("dashboard_1")
                                     )),
                                   
                                   shiny::fluidRow(
@@ -89,67 +85,67 @@ ui_function <- function() {
                                       title = "Distribution of datasets by contributor",
                                       status = "primary",
                                       collapsible = TRUE,
-                                      mod_distribution_ui("distribution_contributor")),
+                                      dfamodules::mod_distribution_ui("distribution_contributor")),
                                     shinydashboard::box(
                                       title = "Distribution of datasets by data type",
                                       status = "primary",
                                       collapsible = TRUE,
-                                      mod_distribution_ui("distribution_datatype")
+                                      dfamodules::mod_distribution_ui("distribution_datatype")
                                     )),
                                   
                                   shiny::fluidRow(
                                     shinydashboard::box(
-                                    title = "Release status of all datasets by contributor",
-                                    status = "primary",
-                                    collapsible = TRUE,
-                                    mod_stacked_bar_ui("stacked_bar_release_status")),                                   
-                                  shinydashboard::box(
-                                    title = "Data flow status by release date",
-                                    status = "primary",
-                                    collapsible = TRUE,
-                                    
-                                    shiny::uiOutput("select_project_ui"),
-                                    
-                                    mod_stacked_bar_ui("stacked_runners")))
-                                  ),
+                                      title = "Release status of all datasets by contributor",
+                                      status = "primary",
+                                      collapsible = TRUE,
+                                      dfamodules::mod_stacked_bar_ui("stacked_bar_release_status")),                                   
+                                    shinydashboard::box(
+                                      title = "Data flow status by release date",
+                                      status = "primary",
+                                      collapsible = TRUE,
+                                      
+                                      shiny::uiOutput("select_project_ui"),
+                                      
+                                      dfamodules::mod_stacked_bar_ui("stacked_runners")))
+          ),
           
           # Administrator tab
           shinydashboard::tabItem(tabName = "administrator",
                                   
-                                  fluidPage(
+                                  shiny::fluidPage(
                                     
-                                    mod_select_storage_project_ui("select_storage_project_1"),
+                                    dfamodules::mod_select_storage_project_ui("select_storage_project_1"),
                                     
-                                    mod_dataset_selection_ui("dataset_selection_1"),
+                                    dfamodules::mod_dataset_selection_ui("dataset_selection_1"),
                                     
                                     br(),
                                     
-                                    mod_update_data_flow_status_ui("update_data_flow_status_1"),
+                                    dfamodules::mod_update_data_flow_status_ui("update_data_flow_status_1"),
                                     
                                     shinydashboard::box(
                                       
                                       width = NULL,
                                       
-                                      mod_highlight_datatable_ui("highlight_datatable_1"),
+                                      dfamodules::mod_highlight_datatable_ui("highlight_datatable_1"),
                                       
                                       br(),
                                       
-                                      actionButton("save_update", "Save Updates"),
-                                      actionButton("clear_update", "Clear Updates")
+                                      shiny::actionButton("save_update", "Save Updates"),
+                                      shiny::actionButton("clear_update", "Clear Updates")
                                       
                                     ),
-                                
-                                    br(),
                                     
-                                    mod_submit_model_ui("submit_model_1"))
+                                    shiny::br(),
+                                    
+                                    dfamodules::mod_submit_model_ui("submit_model_1"))
                                   
           )
-
-          )
+          
         )
       )
     )
-  }
+  )
+}
 
 #' Add external Resources to the Application
 #' 
@@ -164,7 +160,7 @@ golem_add_external_resources <- function(){
   add_resource_path(
     'www', app_sys('app/www')
   )
- 
+  
   tags$head(
     favicon(),
     bundle_resources(
@@ -174,4 +170,16 @@ golem_add_external_resources <- function(){
     # Add here other external resources
     # for example, you can add shinyalert::useShinyalert() 
   )
+}
+
+uiFunc <- function(req) {
+  if (!has_auth_code(shiny::parseQueryString(req$QUERY_STRING))) {
+    authorization_url <- httr::oauth2.0_authorize_url(api, app, scope = scope)
+    return(shiny::tags$script(shiny::HTML(sprintf(
+      "location.replace(\"%s\");",
+      authorization_url
+    ))))
+  } else {
+    app_ui()
+  }
 }

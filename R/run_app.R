@@ -9,14 +9,14 @@
 #' @importFrom golem with_golem_options 
 run_app <- function(
   onStart = NULL,
-  options = list(), 
+  options = list(launch.browser = TRUE), 
   enableBookmarking = NULL,
   uiPattern = "/",
   ...
 ) {
   with_golem_options(
     app = shinyApp(
-      ui = app_ui,
+      ui = uiFunc,
       server = app_server,
       onStart = onStart,
       options = options, 
