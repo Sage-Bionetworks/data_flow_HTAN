@@ -40,9 +40,17 @@ jobs:
         
       # this action sets up pandoc
       - uses: r-lib/actions/setup-pandoc@v2
+    
+    - name: Install renv 0.17.3
+      - run: |
+        install.packages("remotes")
+        library(remotes)
+        remotes::install_version("renv", "0.17.3")
+      - shell: Rscript{0}
         
       # this action activates renv
       - uses: r-lib/actions/setup-renv@v2
+
         # deploy app using rsconnect
       - name: Authorize and deploy app
         run: |
