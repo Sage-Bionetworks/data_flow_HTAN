@@ -46,7 +46,7 @@ jobs:
           install.packages("remotes")
           library(remotes)
           remotes::install_version("renv", "0.17.3")
-        shell: Rscript{0}
+        shell: Rscript {0}
         
       # this action activates renv
       - uses: r-lib/actions/setup-renv@v2
