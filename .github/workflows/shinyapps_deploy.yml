@@ -27,6 +27,7 @@ jobs:
       SCHEMATIC_URL_PROD: https://schematic.api.sagebionetworks.org
       # This should not be necessary for installing from public repo's however remotes::install_github() fails without it.
       GITHUB_PAT:  ${{ secrets.GITHUB_TOKEN }}
+      
 
     steps:
       - name: Install System Dependencies
@@ -45,7 +46,6 @@ jobs:
         # deploy app using rsconnect
       - name: Authorize and deploy app
         run: |
-          renv::restore()
           install.packages("rsconnect")
 
           refName <- Sys.getenv("GITHUB_REF_NAME")
