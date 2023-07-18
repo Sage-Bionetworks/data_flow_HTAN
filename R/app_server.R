@@ -72,8 +72,8 @@ app_server <- function( input, output, session ) {
     # add some columns to manifest to make logic easier
     manifest <- manifest_dfa %>%
       dplyr::mutate(scheduled = !is.na(release_scheduled),
-                    no_embargo = is.na(embargo) || embargo < Sys.Date(),
-                    past_due = !is.na(release_scheduled) && release_scheduled < Sys.Date())
+                    no_embargo = is.na(embargo) | embargo < Sys.Date(),
+                    past_due = !is.na(release_scheduled) & release_scheduled < Sys.Date())
     
     # generate status variable based on some logic that defines various data flow statuses
     status <- sapply(1:nrow(manifest), function(i) {
@@ -81,7 +81,7 @@ app_server <- function( input, output, session ) {
       
       if (row$scheduled == FALSE) {
         status <- "not scheduled"
-      } else if (row$no_embargo == FALSE || row$standard_compliance == FALSE) {
+      } else if (row$no_embargo == FALSE | row$standard_compliance == FALSE) {
         status <- "quarantine"
       } else if (row$no_embargo == TRUE & row$standard_compliance == TRUE & row$released == FALSE) {
         status <- "quarantine (ready for release)"
