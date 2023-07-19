@@ -45,14 +45,17 @@ jobs:
         with:
           use-public-rspm: true
           r-version: 'renv' 
+
+      # install packages
+      - name: Install rsconnect
+        run: |
+          install.packages("rsconnect")
+          install.packages("renv")
+          renv::upgrade(version = "0.17.3")
+        shell: Rscript {0}
         
       # this action activates renv
       - uses: r-lib/actions/setup-renv@v2
-      
-      # install rsconnect
-      - name: Install rsconnect
-        run: install.packages("rsconnect")
-        shell: Rscript {0}
 
         # deploy app using rsconnect
       - name: Authorize and deploy app
