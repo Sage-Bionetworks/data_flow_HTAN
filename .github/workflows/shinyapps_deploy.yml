@@ -114,7 +114,7 @@ jobs:
           apps <- rsconnect::applications()$name
           print(apps)
           if (appName %in% apps) {
-            rsconnect::deployApp(appName = appName)
+            rsconnect::deployApp()
           } else {
             rsconnect::deployApp(appName = appName)
           }
