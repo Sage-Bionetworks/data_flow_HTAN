@@ -44,18 +44,23 @@ jobs:
       - uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
+          r-version: 'renv' 
+
+      # install packages
+      - name: Install rsconnect
+        run: |
+          install.packages("renv")
+          renv::upgrade(version = "0.17.3")
+          renv::install("rsconnect@0.8.29")
+        shell: Rscript {0}
         
       # this action activates renv
       - uses: r-lib/actions/setup-renv@v2
-      
-      # install rsconnect
-      - name: Install rsconnect
-        run: install.packages("rsconnect")
-        shell: Rscript {0}
 
         # deploy app using rsconnect
       - name: Authorize and deploy app
         run: |
+          renv::restore(packages = "renv")
           refName <- Sys.getenv("GITHUB_REF_NAME")
           repo <- Sys.getenv("GITHUB_REPOSITORY")
           appName <- strsplit(repo, "/")[[1]][2]
@@ -106,11 +111,10 @@ jobs:
           # get app names. If app exists, configure then deploy. Otherwise
           # deploy then configure.
           apps <- rsconnect::applications()$name
+          print(apps)
           if (appName %in% apps) {
-            rsconnect::configureApp(appName = appName, size = "xxxlarge", logLevel = "verbose")
             rsconnect::deployApp(appName = appName)
           } else {
             rsconnect::deployApp(appName = appName)
-            rsconnect::configureApp(appName = appName, size = "xxxlarge", logLevel = "verbose")
           }
         shell: Rscript {0}
