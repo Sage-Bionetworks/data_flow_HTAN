@@ -61,7 +61,6 @@ jobs:
       - name: Authorize and deploy app
         run: |
           renv::restore(packages = "renv")
-          
           refName <- Sys.getenv("GITHUB_REF_NAME")
           repo <- Sys.getenv("GITHUB_REPOSITORY")
           appName <- strsplit(repo, "/")[[1]][2]
